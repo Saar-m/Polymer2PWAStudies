@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="my-login.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 
 <dom-module id="my-view1">
   <template>
@@ -23,12 +25,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-      <div class="circle">1</div>
-      <h1>View One</h1>
+      <div class="circle">&#x1f3c6;</div>
+
       <p>This is the first element I add:</p>
       <paper-checkbox>Cool Story Bro</paper-checkbox>
       <paper-checkbox class="styled">It works!</paper-checkbox>
+      <p>Here's the second :</p>
+      <p>Check out these invisible paper-icon-buttons below ,(right is login,left is logout)</p>
 
+
+      <firebase-app auth-domain="polymer2pwastudies.firebaseapp.com"
+        database-url="https://polymer2pwastudies.firebaseio.com/"
+        api-key="AIzaSyD10kZB7peFgbC-Q65zolOXGWTDJ68FQkQ">
+      </firebase-app>
+      <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
+      </firebase-auth>
+
+      <my-login></my-login>
 
     </div>
   </template>

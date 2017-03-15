@@ -1,0 +1,57 @@
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+bower_components/paper-icon-button/paper-icon-button.html
+<dom-module id="my-login">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <firebase-auth
+    id="auth"
+    user="{{user}}"
+    status-known="{{statusKnown}}"
+    provider="google">
+    </firebase-auth>
+
+    <paper-icon-button ontap="login" style="color:green;" hidden$=[[user]] icon="person">Login</paper-icon-button>
+    <paper-icon-button ontap="logout" style="color:red;" hidden$=[[!user]] icon="person_outline">Logout</paper-icon-button>
+
+    <template is="dom-if" if="[[user]]">
+      <h1>Welcome [[user.displayName]]!</h1>
+    </template>
+
+  </template>
+
+  <script>
+    class MyLogin extends Polymer.Element
+    {
+      static get is() { return 'my-login'; }
+
+      static get properties()
+      {return {
+        user :  Object,
+        statusKnown : Object
+        }
+      }
+        login()
+        {
+          console.log("logging you in!");
+          return this.$.auth.signInWithPopup();
+        }
+        logout()
+        {
+          console.log("logging you out!");
+          return this.$.auth.signOut();
+        }
+    }
+
+
+    window.customElements.define(MyLogin.is, MyLogin);
+  </script>
+</dom-module>
