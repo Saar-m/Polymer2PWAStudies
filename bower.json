@@ -17,13 +17,15 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
     "polymer": "Polymer/polymer#2.0-preview",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1",
-    "paper-checkbox": "PolymerElements/paper-checkbox#2.0-preview"
+    "paper-checkbox": "PolymerElements/paper-checkbox#2.0-preview",
+    "polymerfire": "firebase/polymerfire#^0.10.3"
   },
   "devDependencies": {
     "web-component-tester": "6.0.0-prerelease.5"
   },
   "private": true,
   "resolutions": {
-    "polymer": "^2.0.0-rc.1"
+    "polymer": "^2.0.0-rc.1",
+    "webcomponentsjs": "v1.0.0-rc.5"
   }
 }

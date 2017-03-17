@@ -1,0 +1,126 @@
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<!-- <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html"> -->
+<!-- <link rel="import" href="../bower_components/iron-icon/iron-icon.html"> -->
+
+
+
+<dom-module id="my-login">
+    <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      /*.hide{
+display:none;
+}
+
+.show{
+display:block;
+}*/
+    </style>
+
+    <firebase-auth
+    id="auth"
+    user="{{user}}"
+    status-known="{{statusKnown}}"
+    provider="google">
+    </firebase-auth>
+
+    <!-- <paper-icon-button on-tap="login"  hidden$=[[user]] icon="menu"></paper-icon-button> -->
+    <!--  icon="person">Login-->
+    <!--  icon="person_outline">Logout-->
+    <!-- <paper-icon-button on-tap="logout" hidden$=[[!user]] icon="menu">Logout</paper-icon-button> -->
+    <!-- <button on-click="handleClick">Kick Me</button> -->
+    <template is="dom-if" if="[[user]]">
+      <button on-click="logout" id="logouter" class="show">Logout</button>
+
+    </template>
+
+    <template is="dom-if" if="![[user]]">
+    <button on-click="login" id="loginer" class="show">Login</button>
+    </template>
+    <!-- <button on-click="login" id="loginer" class="show">Login</button> -->
+    <!-- <button on-click="logout" id="logouter" class="show">Logout</button> -->
+
+    <template is="dom-if" if="[[user]]">
+      <h1>Welcome [[user.displayName]]!</h1>
+      <h2>You're now authenticated and logged in &#128076;</h2>
+      <!-- <script>
+      console.log('got here');
+      var button =document.getElementById('loginer');
+      button.classList.remove('show');
+      button.classList.add('hide');
+      </script> -->
+    </template>
+
+    </template>
+
+    <script>
+        class MyLogin extends Polymer.Element {
+            static get is() {
+                return 'my-login';
+            }
+
+            static get properties() {
+                return {
+                    user: Object,
+                    statusKnown: Object
+                }
+            }
+            login() {
+                console.log("logging you in!");
+                var that = this;
+                // if([[user]].signedIn()){
+                //   console.log('entered if');
+
+
+
+                // document.getElementById('loginer').classList.remove('show');
+                // document.getElementById('loginer').classList.add('hide');
+                // document.getElementById('logouter').classList.add('show').classList.remove('hide');
+                return that.$.auth.signInWithPopup();
+
+            }
+            logout() {
+                console.log("logging you out!");
+                return this.$.auth.signOut();
+            }
+
+
+
+
+
+            // var user = firebase.auth().currentUser;
+
+
+            // handleClick() {
+            //     console.log('Ow!');
+            // }
+        }
+
+        // document.querySelector('my-login').addEventListener('on-auth-state-changed', function (e) {
+        //   if (user) {
+        //       // User is signed in.
+        //       console.log('entered if');
+        //       var button = document.getElementById("loginer");
+        //       button.classList.remove('show');
+        //       button.classList.add('hide');
+        //   }
+        // })
+
+        // firebase.auth().onAuthStateChanged(function(user) {
+        //     if (user) {
+        //         // User is signed in.
+        //         console.log('entered if');
+        //         var button = document.getElementById("loginer");
+        //         button.classList.remove('show');
+        //         button.classList.add('hide');
+        //     } else {
+        //         // No user is signed in.
+        //     }
+        // });
+        window.customElements.define(MyLogin.is, MyLogin);
+    </script>
+</dom-module>
