@@ -1,0 +1,69 @@
+<!-- template forked from https://github.com/polymer/polymer/tree/2.0-preview#20-es6-class-based-syntax -->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<dom-module id="my-form">
+    <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+    </style>
+
+    <firebase-auth
+    id="auth"
+    user="{{user}}"
+    status-known="{{statusKnown}}"
+    provider="google">
+    </firebase-auth>
+
+    <slot>
+
+
+    </slot>
+
+    </template>
+
+    <script>
+        class MyForm extends Polymer.Element {
+            static get is() {
+                return 'my-form';
+            }
+
+            static get properties() {
+                return {
+                    user: Object,
+                    statusKnown: Object
+                }
+            }
+            static get observers() {
+                return [ /* observer descriptors */ ]
+            }
+            constructor() {
+                super();
+                ...
+            }
+            connectedCallback() {
+                super.connectedCallback();
+                ...
+            }
+            login() {
+                console.log("logging you in!");
+                var that = this;
+
+                return that.$.auth.signInWithPopup();
+
+            }
+            logout() {
+                console.log("logging you out!");
+                return this.$.auth.signOut();
+            }
+
+        }
+
+
+        window.customElements.define(MyForm.is, MyForm);
+    </script>
+</dom-module>
